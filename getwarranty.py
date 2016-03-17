@@ -43,7 +43,6 @@ import cStringIO
 import codecs
 import csv
 import datetime
-import dateutil.parser
 import getopt
 import os.path
 import re
@@ -51,6 +50,8 @@ import subprocess
 import sys
 import time
 import xml.etree.ElementTree as ET
+
+import dateutil.parser
 
 # import pickle   --- no longer doing pickles, switch to json
 try:
@@ -70,8 +71,8 @@ except:
     setattr(requests, 'content', '')
 
 
-    def get(self, urlstr, params={}):
-        if (params):
+    def get(self, urlstr, params=None):
+        if params is not None:
             urlstr += "?%s" % urllib.urlencode(params)
         self.content = self.urlopen(urlstr).read()
         return self
