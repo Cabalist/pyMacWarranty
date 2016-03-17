@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 # Version 2.1
 # Apple has again changed the warranty lookup method and now redirects to
@@ -38,9 +39,19 @@ Print local serial to stdout:   getwarranty
 Several serials to stdout:      getwarranty SERIAL1 SERIAL2 SERIAL3
 """
 
-import sys, subprocess, datetime, os.path, dateutil.parser
-import re, types, time, getopt, csv, codecs, cStringIO
-import xml.etree.ElementTree as ET 
+import cStringIO
+import codecs
+import csv
+import datetime
+import dateutil.parser
+import getopt
+import os.path
+import re
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
 # import pickle   --- no longer doing pickles, switch to json
 try:
     import json
@@ -55,13 +66,18 @@ except:
     # Really, check it out - it's great
     import urllib, types
     import urllib2 as requests
-    setattr(requests,'content','')
+
+    setattr(requests, 'content', '')
+
+
     def get(self, urlstr, params={}):
         if (params):
             urlstr += "?%s" % urllib.urlencode(params)
         self.content = self.urlopen(urlstr).read()
         return self
-    requests.get = types.MethodType(get,requests)
+
+
+    requests.get = types.MethodType(get, requests)
 
 asd_db = {}
 model_db = {}
